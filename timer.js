@@ -29,9 +29,44 @@
 //const secs = Math.floor((time % (1000 * 60)) / 1000);
 
 const refs = {
+  // start: document.querySelector('#start'),
+  // stop: document.querySelector('#stop'),
   secs: document.querySelector('[data-value="secs"]'),
   mins: document.querySelector('[data-value="mins"]'),
   hours: document.querySelector('[data-value="hours"]'),
   days: document.querySelector('[data-value="days"]'),
+  timer: document.querySelector('#timer-1')
 }
-console.log(refs.secs)
+let id = null;
+//let startDate = null;
+const targetDate = new Date('Jul 17, 2019');
+
+function culc() {
+const currentDate = new Date();
+const time = targetDate - currentDate;
+const secs = Math.floor((time % (1000 * 60)) / 1000);
+const mins = Math.floor((time % (1000 * 60 * 60)) / (1000 * 60));
+const hours = Math.floor((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+const days = Math.floor(time / (1000 * 60 * 60 * 24));
+refs.secs.textContent = secs < 10 ? `0${secs}` : mins;
+refs.mins.textContent = mins < 10 ? `0${mins}` : mins;
+refs.hours.textContent = mins < 10 ? `0${hours}` : hours;
+refs.days.textContent = mins < 10 ? `0${days}` : days;
+
+};
+
+
+
+function timerStart() {
+  const targetDate = new Date('Jul 17, 2019');
+  //startDate = new Date('Jul 17, 2019');
+  id = setInterval(culc, 1000);
+  console.log(targetDate);
+};
+function timerStop() {
+  clearInterval(id)
+};
+//refs.start.addEventListener('click', timerStart)
+//refs.stop.addEventListener('click', timerStop);
+window.addEventListener("DOMContentLoaded", timerStart)
+
