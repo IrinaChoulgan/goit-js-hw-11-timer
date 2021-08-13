@@ -30,6 +30,11 @@ class CountdownTimer {
     init() {
       window.addEventListener("DOMContentLoaded",this.timerStart)
     }
+    timeFinish(time) {
+      if (time < 0) {
+        clearInterval(this.setInterval);
+      }
+    }
 };
 
 const timer = new CountdownTimer({
